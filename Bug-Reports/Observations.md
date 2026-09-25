@@ -14,3 +14,11 @@
 - **What I expected:** A grammatically correct message, e.g., "Email Address already exists!"
 - **Type:** Cosmetic (UI text)
 - **Status:** To be reported in Phase 7 (Bug Reporting)
+
+## OBS-03: Invoice shows total purchase amount as 0 for orders containing Blue Top
+- **Page:** "Order Placed!" page → Download Invoice
+- **What I did:** Placed an order containing only Blue Top (Rs. 500, quantity 1), then clicked Download Invoice and opened invoice.txt
+- **What happened:** The invoice shows: "Hi Lara K, Your total purchase amount is 0. Thank you"
+- **What I expected:** The invoice shows the order total from the Checkout page (Rs. 500)
+- **Reproducible:** Yes, 2 of 2 times with Blue Top. An order with Madame Top For Women showed the correct amount.
+- **Status:** To be reported in Phase 7 (Bug Reporting)

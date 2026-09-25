@@ -42,3 +42,18 @@
 | FR-CART-06 | Cart | The system shall display "Cart is empty! Click here to buy products." when the user removes all the products in the Shopping Cart page. | Observed |
 | FR-CART-07 | Cart | The system shall display Address Details page when the registered user clicks Proceed To Checkout. | Observed |
 | FR-CART-08 | Cart | The system shall display a "Checkout" pop-up with the message "Register / Login account to proceed on checkout.", a Register / Login link and a Continue On Cart button when the guest user clicks Proceed to Checkout.| Observed |
+
+## Checkout and Payment
+| ID | Module | Requirement | Source |
+|---|---|---|---|
+| FR-CHK-01 | Checkout and Payment | The system shall display Address Details, Order Review, a comment box and a Place Order button on the Checkout page when a logged-in user clicks Proceed To Checkout.| Observed |
+| FR-CHK-02 | Checkout and Payment | The system shall display the inputs for Name on Card, Card Number, CVC, Expiration and a Pay and Confirm Order button in the Payment page. | Observed |
+| FR-CHK-03 | Checkout and Payment | The system shall display the total amount that matches the sum of the total of each product row on the page. | Observed |
+| FR-CHK-04 | Checkout and Payment | The system shall treat the following fields as required: Name on Card, Card Number, CVC, Expiration. | Assumption (to confirm with PO) |
+| FR-CHK-05 | Checkout and Payment | The system shall display "Please fill out this field." when the user clicks Pay and Confirm Order with any required field empty. (Chrome) | Observed |
+| FR-CHK-06 | Checkout and Payment | The system shall display "Your order has been placed successfully!"  when the user clicks Pay and Confirm Order with all required field filled in. | Observed |
+| FR-CHK-07 | Checkout and Payment | The system shall display "Order Placed!", "Congratulations! Your order has been confirmed!", a Download Invoice button and a Continue button after the order is placed successfully. | Observed |
+| FR-CHK-08 | Checkout and Payment | The system shall download a file named invoice.txt when the user clicks Download Invoice. | Observed |
+| FR-CHK-09 | Checkout and Payment | The system shall display Home page when the user clicks Continue on the "Order Placed!" page. | Observed |
+| FR-CHK-10 | Checkout and Payment | The invoice shall contain the customer's name. | Observed |
+| FR-CHK-11 | Checkout and Payment | The invoice shall show a total purchase amount equal to the order total on the Checkout page. | Observed (fails for Blue Top, see OBS-03) | |
