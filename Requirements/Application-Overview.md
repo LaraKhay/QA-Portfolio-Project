@@ -15,7 +15,7 @@ B2C E-commerce web application (online clothing store)
 - No admin role is visible or accessible from public site.
 
 ## 5. Main features
-Account signup, account login, search products, filter products by brand and category, view product details, add products to cart, checkout, remove items from cart ,place order and payment, download invoice, delete account , write reviews ,  contact us form, newsletter subscription, account logout.
+Account sign up, account login, search products, filter products by brand and category, view product details, add products to cart, checkout, remove items from cart ,place order and payment, download invoice, delete account , write reviews ,  contact us form, newsletter subscription, account logout.
 
 ## 6. The main user journey
 - Returning user:  Login-> Browse -> View product -> Add to cart-> Checkout->Place order-> Pay and confirm order->Download invoice-> Logout.
