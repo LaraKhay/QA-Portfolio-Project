@@ -1,0 +1,13 @@
+# Requirements Review
+*Product owner answers were simulated by my project mentor for practice purposes.*
+
+| ID | Type | Problem | Question for Product Owner | Related Requirement | PO Answer | Status |
+|---|---|---|---|---|---|---|
+| RQ-01 | Missing | No requirement defines what happens when a product is out of stock. | What should the system show and allow when a product is out of stock? | None yet | Out of Stock item must show an "Out of Stock" label with disabled Add to Cart button. | Answered |
+| RQ-02 | Missing | No requirement defines how Recommended Items are chosen. | What criteria decide which products appear in the Recommended Items section? | None yet | The marketing team manually choose recommended items. | Out of scope |
+| RQ-03 | Missing | No limit for how many products a customer can purchase. | Is there a maximum quantity per product? What should the system show if it is exceeded? | None yet | Quantity must be 1–10 per product. Quantity 0 or less is not accepted. Above 10 shows 'Maximum quantity per product is 10.' | Answered |
+| RQ-04 | Missing | No rule for passwords | What are the rules for password (maximum/ minimum length, required special characters)? | None yet | Password must be 8–20 characters and include at least one letter and one number. Otherwise show "Password must be 8–20 characters and include at least one letter and one number. | Answered |
+| RQ-05 | Missing | No requirement defines what happens when a customer forgets password. | Should customers be able to reset a forgotten password? | None yet | Not included in this release but plan to include in future version. | Deferred |
+| RQ-06 | Missing | No requirement defines the confirmation before a user logout. | What should the system show to confirm the logout when the customer clicks Logout? | FR-LOG-11 | No need to confirm when a customer try to logout. | Answered |
+| RQ-07 | Missing | No requirement defines what happens when a user tries to sign up using an email address without domain extension. | What should the system display when a user signs up with an email address without a domain extension? | FR-REG-01 | Email address without domain extension shall be rejected and "Please enter a valid email address." is shown to customer. | Answered |
+| RQ-08 | Ambiguous | The Payment page fields are treated as required (FR-CHK-05) but are not marked with *, unlike the Registration form. | Should required fields on the Payment page be marked with * like the Registration form? | FR-CHK-04, FR-CHK-05 | All required fields shall be marked with *. | Answered |

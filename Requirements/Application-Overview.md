@@ -29,7 +29,8 @@ Account sign up, account login, search products, filter products by brand and ca
 - Is there a limit of product items a customer can purchase? 
 - What are the rules for password(maximum/ minimum length, required special characters)? 
 - What should happen if the customer sign up with an email that is already registered?
-- Should a customer able to reset a forgetten password?
+- Should a customer able to reset a forgotten password?
+
 ### Suggestions
 - Customers should be able to add their card info in their profile instead of filling the card info every time users try to checkout.
 - Customers should be able to get access to their placed orders.

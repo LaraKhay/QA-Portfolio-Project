@@ -4,7 +4,7 @@
 - **What happened:** The website accepted it and created the account
 - **What I expected:** An error message asking for a valid email address
 - **Note:** Login correctly rejects an email that does not exactly match the registered one (tested with a fresh account), so the issue is only on the Sign up page.
-- **Status:** To confirm with the product owner
+- **Status:** Confirmed as a defect by PO (RQ-07). To be reported in Phase 7 (Bug Reporting)
 - **Reproducible:** Yes (tested twice with fresh email addresses, e.g., lara.reg01@gmail)
 
 ## OBS-02: Grammar error in duplicate email message on Signup

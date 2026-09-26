@@ -13,12 +13,12 @@
 | FR-LOG-08 | Logout | The system shall display a Logout button in the header after the user logs in successfully. | Observed |
 | FR-LOG-09 | Logout | The system shall display the login form if the user clicks Logout button | Observed |
 | FR-LOG-10 | Logout | The system shall remove "Logged in as [username]" in the header if the user clicks Logout. | Observed |
-| FR-LOG-11 | Logout | The system shall display "Confirm to Logout" message after the user clicks Logout button  | Assumption (to confirm with PO) |
+
 
 ## Registration
 | ID | Module | Requirement | Source |
 |---|---|---|---|
-| FR-REG-01 | Registration | The system shall display an error message and not continue with sign up when the user enters an email address without a domain extension (e.g., test@gmail). | Assumption (to confirm with PO) |
+| FR-REG-01 | Registration | The system shall display "Please enter a valid email address." and not continue with signup when the user enters an email address without a domain extension (e.g., test@gmail). | Confirmed by PO (RQ-07) |
 | FR-REG-02 | Registration | The system shall display "Email Address already exist!" when the user enters an Email address that is already registered.  | Observed |
 | FR-REG-03 | Registration | The system shall display "Enter Account Information" page when the user clicks Signup with a Name and Email address.  | Observed |
 | FR-REG-04 | Registration | The system shall mask the characters entered in the Password field (displayed as dots). | Observed |
