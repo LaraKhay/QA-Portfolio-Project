@@ -30,6 +30,11 @@
 | FR-REG-10 | Registration | The system shall display "Please fill out this field." and not create the account when the user clicks Create Account with any required field empty. (Chrome) | Observed |
 | FR-REG-11 | Registration | The system shall display "Account Created!" page after the user clicks Create Account with every required field filled in.  | Observed |
 | FR-REG-12 | Registration | The system shall display Home page with "Logged in as [username]" in the header when the user clicks Continue on "Account Created!" page. | Observed |
+| FR-REG-13 | Registration | The system shall display "Password must be 8–20 characters and include at least one letter and one number." and not create the account when the user enters a password shorter than 8 characters. | Confirmed by PO (RQ-04) |
+| FR-REG-14 | Registration | The system shall display "Password must be 8–20 characters and include at least one letter and one number." and not create the account when the user enters a password more than 20 characters. | Confirmed by PO (RQ-04) |
+| FR-REG-15 | Registration | The system shall display "Password must be 8–20 characters and include at least one letter and one number." and not create the account when the user enters a password without any number. | Confirmed by PO (RQ-04) |
+| FR-REG-16 | Registration | The system shall display "Password must be 8–20 characters and include at least one letter and one number." and not create the account when the user enters a password without any letter. | Confirmed by PO (RQ-04) |
+| FR-REG-17 | Registration | The system shall create the account and display the "Account Created!" page when the user enters a password of 8-20 characters with at least one letter and one number and all other required fields are filled. | Confirmed by PO (RQ-04) |
 
 ## Cart
 | ID | Module | Requirement | Source |
@@ -42,6 +47,12 @@
 | FR-CART-06 | Cart | The system shall display "Cart is empty! Click here to buy products." when the user removes all the products in the Shopping Cart page. | Observed |
 | FR-CART-07 | Cart | The system shall display Address Details page when the registered user clicks Proceed To Checkout. | Observed |
 | FR-CART-08 | Cart | The system shall display a "Checkout" pop-up with the message "Register / Login account to proceed on checkout.", a Register / Login link and a Continue On Cart button when the guest user clicks Proceed to Checkout.| Observed |
+| FR-CART-09 | Cart | The system shall display "Maximum quantity per product is 10." and not add the product to cart when the user enters a quantity more than 10 in product details page and  clicks Add to cart. | Confirmed by PO (RQ-03) |
+| FR-CART-10 | Cart | The system shall not add the product to cart when the user enters a quantity of 0 or less on the product details page and clicks Add to cart. | Confirmed by PO (RQ-03) |
+| FR-CART-11 | Cart | The system shall add the product to the cart with the entered quantity when the user enters a quantity between 1 and 10 on the product details page and clicks Add to cart. | Confirmed by PO (RQ-03) |
+| FR-CART-12 | Cart | The system shall display the quantity on the Shopping Cart page as read-only. | Observed |
+| FR-CART-13 | Cart | The system shall display an "Out of Stock" label on the Products page and the product details page when a product is out of stock. | Confirmed by PO (RQ-01, RQ-09). Not testable now: no out-of-stock products available. |
+| FR-CART-14 | Cart | The system shall disable the Add to cart button when a product is out-of-stock. | Confirmed by PO (RQ-01) Not testable now: no out-of-stock products available. |
 
 ## Checkout and Payment
 | ID | Module | Requirement | Source |
@@ -56,4 +67,5 @@
 | FR-CHK-08 | Checkout and Payment | The system shall download a file named invoice.txt when the user clicks Download Invoice. | Observed |
 | FR-CHK-09 | Checkout and Payment | The system shall display Home page when the user clicks Continue on the "Order Placed!" page. | Observed |
 | FR-CHK-10 | Checkout and Payment | The invoice shall contain the customer's name. | Observed |
-| FR-CHK-11 | Checkout and Payment | The invoice shall show a total purchase amount equal to the order total on the Checkout page. | Observed (fails for Blue Top, see OBS-03) | |
+| FR-CHK-11 | Checkout and Payment | The invoice shall show a total purchase amount equal to the order total on the Checkout page. | Observed (fails for Blue Top, see OBS-03) |
+| FR-CHK-12 | Checkout and Payment | The system shall mark all the required fields with * on the Payment page. | Confirmed by PO (RQ-08).Currently fails, see OBS-04. |

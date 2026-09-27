@@ -22,3 +22,13 @@
 - **What I expected:** The invoice shows the order total from the Checkout page (Rs. 500)
 - **Reproducible:** Yes, 2 of 2 times with Blue Top. An order with Madame Top For Women showed the correct amount.
 - **Status:** To be reported in Phase 7 (Bug Reporting)
+
+## OBS-04: Required fields on the Payment page are not marked with *
+- **Page:** "Payment" page
+- **What I did:** Opened the Payment page and checked the field labels. Then left the fields empty and clicked Pay and Confirm Order.
+- **What happened:** Name on Card, Card Number, CVC, and Expiration are not marked with *. However, leaving any of them empty shows "Please fill out this field.", so they are required.
+- **What I expected:** The system marks all the required fields with * on the Payment page.
+- **Type:** UI / Usability
+- **Related:** requirement: FR-CHK-12
+- **Reproducible:** Yes (always visible on the Payment page)
+- **Status:** Confirmed as a defect by PO (RQ-08). To be reported in Phase 7 (Bug Reporting)
