@@ -65,3 +65,73 @@
 9. **Report:** Summarize the results, defects, and risks in a Test Summary Report.
 
 
+## 7. Entry and Exit Criteria
+
+### Entry Criteria
+- The test environment is ready: Chrome and Safari are installed, and test accounts are created with fake email addresses.
+- Requirement documents are completed: Functional-Requirements.md, Business-Rules-NFRs.md, Requirements-Review.md(with PO answers) and the RTM.
+- Test cases are written for all in-scope requirements, prioritized, and peer-reviewed (by the project mentor).
+- The smoke test passed: the Home page loads, a user can log in, and a product can be added to the cart.
+- Test data is prepared for all in-scope modules: valid and invalid emails, password at boundary lengths, quantities and fake card details.
+
+### Exit Criteria
+- No Critical defects remain open, unless the Product Owner accepts them as known issues and they are documented in the Test Summary Report.
+- At least 90% of executed test cases have passed.
+- All defects are logged in the defect log, and the RTM is updated with test case IDs, execution status, and defect IDs.
+- The Test Summary Report is completed.
+
+## 8. Risks
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Other users of the public site may create or change data (e.g., accounts with the same email). | Test results may be affected by data we did not create. | Use a unique fake email for every test account. |
+| FR-CART-13 and FR-CART-14 cannot be tested because no products are out of stock on the site. | The out-of-stock behavior remains unverified. | Mark these tests as Blocked, report them as untested in the Test Summary Report, and test them if an out-of-stock product becomes available. |
+| The site changes or goes offline during testing. | Testing is delayed, and earlier results may no longer match the site. | Record the date and time of every test run and save screenshots as evidence. If the site is offline, pause and retry later. Note any site changes in the test results. |
+| Testing time runs out. | Not all test cases are executed. | Prioritize test cases by risk so the most important features are tested first. |
+
+## 9. Assumptions
+- The product owner answers in the Requirements Review are final for this project.
+- The site accepts fake card details on the Payment page.
+- The site stays the same throughout the project.
+
+## 10. Dependencies
+- A stable internet connection is needed to access the website.
+- The Automation Exercise website and its public API must be available during testing.
+- The required tools must be installed: Google Chrome, Safari, VS Code, Git, Postman, DB Browser for SQLite, and Node.js (needed to run Playwright).
+- GitHub must be available to store project documents and run automated tests with GitHub Actions.
+- Test cases and documents depend on peer review by the project mentor before execution.
+
+## 11. Deliverables
+| Deliverable | Location |
+|---|---|
+| Application Overview | Requirements/Application-Overview.md |
+| Functional Requirements | Requirements/Functional-Requirements.md |
+| Business Rules, NFRs, and User Roles | Requirements/Business-Rules-and-NFRs.md |
+| Requirements Review (PO questions and answers) | Requirements/Requirements-Review.md |
+| Requirements Traceability Matrix | RTM/ (.xlsx and .csv) |
+| QA Workflow | Test-Plan/QA-Workflow.md |
+| Test Plan | Test-Plan/Test-Plan.md |
+| Test Scenarios | Test-Scenarios/ |
+| Test Cases (including regression checklist) | Test-Cases/ |
+| Test Data | Test-Data/ |
+| Observations, Defect Log, and Bug Reports | Bug-Reports/ |
+| Test Evidence (screenshots) | Screenshots/ |
+| API Test Collection and API Test Cases | API-Testing/ |
+| SQL Scripts and Database Test Cases | SQL/ |
+| Automation Scripts and Test Reports | Automation/ |
+| Test Summary Report | Test-Reports/ |
+
+## 12. Schedule
+*Dates assume about 10 hours of work per week and will be updated if the plan changes.*
+
+| Activity | Project Phase | Planned Dates |
+|---|---|---|
+| Requirement Analysis | Phase 2 | Completed |
+| Test Planning | Phase 3 | Sep 28 – Oct 2, 2026 |
+| Test Scenarios and Test Case Design | Phases 4–5 | Oct 3 – Oct 16, 2026 |
+| Test Execution, Bug Reporting, and Bug Lifecycle | Phases 6–8 | Oct 17 – Oct 27, 2026 |
+| API Testing | Phase 9 | Oct 28 – Nov 3, 2026 |
+| Database Testing | Phase 10 | Nov 4 – Nov 10, 2026 |
+| Automation Testing | Phase 11 | Nov 11 – Nov 24, 2026 |
+| Regression Testing | Phase 12 | Nov 25 – Nov 28, 2026 |
+| Test Summary Report | Phase 13 | Nov 29 – Dec 1, 2026 |
+
