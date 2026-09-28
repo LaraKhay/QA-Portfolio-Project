@@ -26,5 +26,31 @@
 - **Real payment processing:** Only fake card data is used, so actual payment charging and bank responses cannot be verified. Entering real card data on a public practice site would also be unsafe.
 - **Contact Us form and newsletter subscription:** No formal requirements were written for these features in this project.
 
+## 4. Test Environment
+| Item | Details |
+|---|---|
+| Application under test | Automation Exercise (https://automationexercise.com) |
+| Device | MacBook Air |
+| Operating system | macOS Tahoe 26.5.2 |
+| Browsers | Google Chrome 155.0.8059.12(arm64), Safari 26.5.2 |
+| Mobile view | Chrome DevTools device emulation (375 px width) |
+| Test accounts | New accounts are created with unique fake email addresses for each test (e.g., lara.qa.reg01@mailinator.com). Only fake personal and card data is used. |
+| Tools | VS Code (Markdown), Git and GitHub, Google Sheets, Postman, DB Browser for SQLite, Playwright (TypeScript), GitHub Actions, macOS Screenshot |
+| Network | Home Wi-Fi |
+
+## 5. Testing Types
+| Testing Type | Meaning | How it is used in this project |
+|---|---|---|
+| Smoke testing | A quick check that the most important features work before deeper testing | Before each test cycle, check that the Home page loads, a user can log in, and a product can be added to the cart. |
+| Functional testing | Checking features against the requirements | Check the system features: Login and Logout, Registration, Cart and Checkout and Payment against their 53 functional requirements. |
+| UI testing | Checking what users see: labels, layout, messages | Check that labels, buttons, messages, and required-field markers appear correctly on all in-scope pages (e.g., the grammar error in OBS-02 and the missing * markers in OBS-04). |
+| Exploratory testing | Testing freely without written test cases to discover issues | Test products browsing and searching without formal requirements. |
+| Regression testing | Re-running tests after a change to make sure nothing else broke | After defect fixes or site changes, and at the end of testing, re-run a set of critical tests for login, registration, cart, and checkout to confirm nothing else broke. |
+| Compatibility testing | Checking the site works on different browsers and screen sizes | Check that the site displays and works correctly on Google Chrome and Safari, and at mobile width (375 px) using Chrome DevTools device emulation. |
+| Basic security checks | Simple checks that protect user data | Check the URL is starting with HTTPS and connection is secure or not in login/signup and payment pages and that passwords are masked (FR-REG-04). |
+| API testing | Testing the system's API directly, without the website screens | Test the public API endpoints return correct responses and status codes using Postman. |
+| Database testing | Checking that stored data is correct | Write SQL queries against a practice SQLite database modeled on the store (users, products, orders) to verify data such as registered users and order totals. |
+| Automation testing | Using code to run tests automatically |  Automate key user flows (login, add to cart, checkout) with Playwright and run them automatically with GitHub Actions. |
+
 
 
