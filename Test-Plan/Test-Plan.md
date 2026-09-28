@@ -53,4 +53,15 @@
 | Automation testing | Using code to run tests automatically |  Automate key user flows (login, add to cart, checkout) with Playwright and run them automatically with GitHub Actions. |
 
 
+## 6. Test Approach
+1. **Smoke test first:** Before each test cycle, run the smoke checks (Home page loads, user can log in, product can be added to the cart). If a smoke check fails, stop and report it before continuing.
+2. **Design test cases:** Write test cases from the functional requirements, including positive and negative tests. Use equivalence partitioning and boundary value analysis for rules with numeric limits (password length 8–20, quantity 1–10).
+3. **Execute by risk priority:** Test the highest-risk modules first: Checkout and Payment and Login (money and access), then Registration and Cart, then UI text and appearance.
+4. **Log defects:** Record every failed test in the defect log with steps to reproduce, expected and actual results, severity, priority, and screenshots.
+5. **Retest and regression:** When a defect is fixed, retest it to confirm the fix, then run the regression tests to make sure nothing else broke.
+6. **API and database testing:** After manual UI testing, test the public API endpoints with Postman and verify data with SQL queries on the practice database.
+7. **Automation:** Automate stable, frequently repeated flows (login, add to cart, checkout) with Playwright and run them with GitHub Actions.
+8. **Exploratory testing:** Run short exploratory sessions throughout testing, especially for product browsing and search, to find issues not covered by test cases.
+9. **Report:** Summarize the results, defects, and risks in a Test Summary Report.
+
 
