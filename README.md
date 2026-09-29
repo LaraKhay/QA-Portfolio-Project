@@ -4,12 +4,56 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 
 **Application under test:** [Automation Exercise](https://automationexercise.com), a public demo online clothing store built for testing practice.
 
-**Status:** 🚧 In progress. Currently in Phase 1: Project Setup.
-
-**Planned tools:** Google Sheets, Postman, SQLite, Playwright, Git/GitHub, GitHub Actions
+**Status:** 🚧 In progress. Currently in Phase 4: Test Scenarios.
 
 **Author:** Nang Yu Yu Khay (Lara)
 
 ---
 
-*This project is for learning and portfolio purposes. I am not affiliated with Automation Exercise.*
+## Project Progress
+
+| Phase | Status |
+|---|---|
+| 1. Project Setup | ✅ Completed |
+| 2. Requirement Analysis | ✅ Completed |
+| 3. Test Plan | ✅ Completed |
+| 4. Test Scenarios | 🚧 In progress |
+| 5. Test Case Design | ⏳ Planned |
+| 6. Test Execution | ⏳ Planned |
+| 7. Bug Reporting | ⏳ Planned |
+| 8. Bug Lifecycle | ⏳ Planned |
+| 9. API Testing | ⏳ Planned |
+| 10. Database Testing | ⏳ Planned |
+| 11. Automation Testing | ⏳ Planned |
+| 12. Regression Testing | ⏳ Planned |
+| 13. Test Summary Report | ⏳ Planned |
+
+## Completed Work
+
+- [Application Overview](Requirements/Application-Overview.md): features, user types, user journeys, and clarifying questions
+- [Functional Requirements](Requirements/Functional-Requirements.md): testable requirements for Login and Logout, Registration, Cart, and Checkout and Payment
+- [Business Rules, NFRs, and User Roles](Requirements/Business-Rules-and-NFRs.md)
+- [Requirements Review](Requirements/Requirements-Review.md): missing and ambiguous requirements, with product owner answers
+- [Requirements Traceability Matrix](RTM/): 60 requirements traced to test cases and defects
+- [QA Workflow](Test-Plan/QA-Workflow.md): how this project follows SDLC and STLC
+- [Test Plan](Test-Plan/Test-Plan.md): objectives, scope, environment, approach, entry and exit criteria, risks, and schedule
+- [Test Scenarios](Test-Scenarios/Test-Scenarios.md): in progress
+
+## Key Findings So Far
+
+| ID | Finding | Status |
+|---|---|---|
+| OBS-01 | Signup accepts an email address without a domain extension (e.g., test@gmail) | Confirmed as a defect by PO |
+| OBS-02 | Grammar error in the duplicate email message ("already exist!") | To be reported |
+| OBS-03 | Invoice shows a total of 0 for orders containing Blue Top (reproducible) | To be reported |
+| OBS-04 | Required fields on the Payment page are not marked with * | Confirmed as a defect by PO |
+
+Full details: [Observations](Bug-Reports/Observations.md)
+
+## Tools
+
+Google Sheets, VS Code (Markdown), Git and GitHub, Postman, DB Browser for SQLite, Playwright, GitHub Actions
+
+---
+
+*This project is for learning and portfolio purposes. I am not affiliated with Automation Exercise. Product owner answers in this project were simulated by my project mentor for practice purposes.*
