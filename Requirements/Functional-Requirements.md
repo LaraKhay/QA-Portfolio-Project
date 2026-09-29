@@ -13,6 +13,8 @@
 | FR-LOG-08 | Logout | The system shall display a Logout button in the header after the user logs in successfully. | Observed |
 | FR-LOG-09 | Logout | The system shall display the login form if the user clicks Logout button | Observed |
 | FR-LOG-10 | Logout | The system shall remove "Logged in as [username]" in the header if the user clicks Logout. | Observed |
+| FR-LOG-12 | Login | The system shall log in a registered user who enters the email with different capitalization (e.g., LARA.QA01@MAILINATOR.COM) and the correct password. | Confirmed by PO (RQ-10) |
+| FR-LOG-13 | Login | The system shall remove spaces before and after the entered email and log in a registered user who enters the correct password. | Confirmed by PO (RQ-10) |
 
 
 ## Registration
