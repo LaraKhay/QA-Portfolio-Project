@@ -66,3 +66,24 @@
 | TS-CART-19 | Verify that the user can enter a valid quantity and add the product after the "Maximum quantity per product is 10." error. | Error handling | None (new scenario) |
 | TS-CART-20 | Verify that a guest user sees the "Checkout" pop-up asking to Register / Login when clicking Proceed To Checkout. | Security | FR-CART-08 |
 | TS-CART-21 | Verify that the pop-up lets the user choose Continue Shopping or View Cart after adding a product. | Usability | FR-CART-01 |
+
+## Checkout and Payment
+| ID | Scenario | Type | Related Requirement |
+|---|---|---|---|
+| TS-CHK-01 | Verify that Address Details, Order Review, a comment box, and a Place Order button appear on the Checkout page when a logged-in user clicks Proceed To Checkout. | Positive | FR-CHK-01 |
+| TS-CHK-02 | Verify that the total amount on the Checkout page matches the sum of the Total of each product. | Positive | FR-CHK-03 |
+| TS-CHK-03 | Verify that the Name on Card, Card Number, CVC, and Expiration fields and a Pay and Confirm Order button appear on the Payment page when the user clicks Place Order. | Positive | FR-CHK-02 |
+| TS-CHK-04 | Verify that "Your order has been placed successfully!" appears when the user fills in all required fields on the Payment page and clicks Pay and Confirm Order. | Positive | FR-CHK-06 |
+| TS-CHK-05 | Verify that the "Order Placed!" page displays "Congratulations! Your order has been confirmed!", a Download Invoice button, and a Continue button after the order is placed. | Positive | FR-CHK-07 |
+| TS-CHK-06 | Verify that a file named invoice.txt is downloaded when the user clicks Download Invoice. | Positive | FR-CHK-08 |
+| TS-CHK-07 | Verify that the downloaded invoice includes the customer's name. | Positive | FR-CHK-10 |
+| TS-CHK-08 | Verify that the downloaded invoice shows a total purchase amount equal to the order total on the Checkout page. | Positive | FR-CHK-11 |
+| TS-CHK-09 | Verify that the Home page is displayed when the user clicks Continue on the "Order Placed!" page. | Positive | FR-CHK-09 |
+| TS-CHK-10 | Verify that the order is not placed and "Please fill out this field." appears when any required field on the Payment page is left empty. | Validation | FR-CHK-04, FR-CHK-05 |
+| TS-CHK-11 | Verify the behavior when the user enters an expired date in the Expiration fields. | Validation | None (new scenario) |
+| TS-CHK-12 | Verify the behavior when the user enters letters in the Card Number field. | Validation | None (new scenario) |
+| TS-CHK-13 | Verify the behavior when the user enters a CVC with only 2 digits. | Validation | None (new scenario) |
+| TS-CHK-14 | Verify that the user can fill in an empty required field and complete the order after the "Please fill out this field." message appears. | Error handling | None (new scenario) |
+| TS-CHK-15 | Verify that the Payment page uses a secure HTTPS connection. | Security | NFR-SEC-01 |
+| TS-CHK-16 | Verify that all required fields on the Payment page are marked with *. | Usability | FR-CHK-12 |
+| TS-CHK-17 | Verify that a logged-in user can add a product to the cart, view the cart, proceed to checkout, place the order, pay and confirm the order, and download the invoice. | End-to-end | Multiple (end-to-end flow) |

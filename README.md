@@ -4,7 +4,7 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 
 **Application under test:** [Automation Exercise](https://automationexercise.com), a public demo online clothing store built for testing practice.
 
-**Status:** 🚧 In progress. Currently in Phase 4: Test Scenarios.
+**Status:** 🚧 In progress. Currently in Phase 5: Test Case Design.
 
 **Author:** Nang Yu Yu Khay (Lara)
 
@@ -17,8 +17,8 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 | 1. Project Setup | ✅ Completed |
 | 2. Requirement Analysis | ✅ Completed |
 | 3. Test Plan | ✅ Completed |
-| 4. Test Scenarios | 🚧 In progress |
-| 5. Test Case Design | ⏳ Planned |
+| 4. Test Scenarios | ✅ Completed |
+| 5. Test Case Design | 🚧 In progress |
 | 6. Test Execution | ⏳ Planned |
 | 7. Bug Reporting | ⏳ Planned |
 | 8. Bug Lifecycle | ⏳ Planned |
@@ -37,7 +37,7 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 - [Requirements Traceability Matrix](RTM/): 60 requirements traced to test cases and defects
 - [QA Workflow](Test-Plan/QA-Workflow.md): how this project follows SDLC and STLC
 - [Test Plan](Test-Plan/Test-Plan.md): objectives, scope, environment, approach, entry and exit criteria, risks, and schedule
-- [Test Scenarios](Test-Scenarios/Test-Scenarios.md): in progress
+- [Test Scenarios](Test-Scenarios/Test-Scenarios.md): 72 scenarios covering all 58 functional requirements,plus about 15 new scenarios from my tester thinking: security, usability, error handling, and edge cases.
 
 ## Key Findings So Far
 
