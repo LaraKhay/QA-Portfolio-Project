@@ -41,3 +41,28 @@
 | TS-REG-18 | Verify that the system pre-fills the Email field with the email entered on the Signup form. | Usability | FR-REG-05 |
 | TS-REG-19 | Verify that the system pre-fills the Name field with the name entered on the Signup form. | Usability | FR-REG-07 |
 | TS-REG-20 | Verify that the system marks the required fields with *. | Usability | FR-REG-09 |
+
+## Cart
+| ID | Scenario | Type | Related Requirement |
+|---|---|---|---|
+| TS-CART-01 | Verify that the "Added!" pop-up appears when the user clicks Add to cart. | Positive | FR-CART-01 |
+| TS-CART-02 | Verify that the added product appears on the Shopping Cart page with the Item, Description, Price, Quantity, and Total columns. | Positive | FR-CART-02 |
+| TS-CART-03 | Verify that the product is added to the cart with the quantity entered on the product details page. | Positive | FR-CART-11 |
+| TS-CART-04 | Verify that clicking Add to cart again for the same product increases its quantity in the cart by 1. | Positive | FR-CART-03 |
+| TS-CART-05 | Verify that the Total of each product equals the price multiplied by the quantity. | Positive | FR-CART-04 |
+| TS-CART-06 | Verify that the quantity on the Shopping Cart page is read-only. | Positive | FR-CART-12 |
+| TS-CART-07 | Verify that a product is removed from the cart when the user clicks the X (delete) icon for that product. | Positive | FR-CART-05 |
+| TS-CART-08 | Verify that "Cart is empty! Click here to buy products." appears when the user removes all products from the cart. | Positive | FR-CART-06 |
+| TS-CART-09 | Verify that the Address Details page appears when a logged-in user clicks Proceed To Checkout. | Positive | FR-CART-07 |
+| TS-CART-10 | Verify that an out-of-stock product displays an "Out of Stock" label on the Products page and the product details page. | Positive | FR-CART-13 |
+| TS-CART-11 | Verify that the Add to cart button is disabled for an out-of-stock product. | Positive | FR-CART-14 |
+| TS-CART-12 | Verify that the product is not added to the cart when the user enters a quantity greater than 10 on the product details page. | Negative | FR-CART-09 |
+| TS-CART-13 | Verify that the product is not added to the cart when the user enters a quantity of 0 or less on the product details page. | Negative | FR-CART-10 |
+| TS-CART-14 | Verify the behavior when the user enters a decimal quantity (e.g., 2.5) on the product details page. | Validation | None (new scenario) |
+| TS-CART-15 | Verify the behavior when the user enters letters (e.g., "abc") in the Quantity field on the product details page. | Validation | None (new scenario) |
+| TS-CART-16 | Verify that the product is added to the cart when the user enters a quantity of exactly 1. | Edge case | FR-CART-11 |
+| TS-CART-17 | Verify that the product is added to the cart when the user enters a quantity of exactly 10. | Edge case | FR-CART-11 |
+| TS-CART-18 | Verify the cart contents after the user logs out and logs in again. | Edge case | None (new scenario) |
+| TS-CART-19 | Verify that the user can enter a valid quantity and add the product after the "Maximum quantity per product is 10." error. | Error handling | None (new scenario) |
+| TS-CART-20 | Verify that a guest user sees the "Checkout" pop-up asking to Register / Login when clicking Proceed To Checkout. | Security | FR-CART-08 |
+| TS-CART-21 | Verify that the pop-up lets the user choose Continue Shopping or View Cart after adding a product. | Usability | FR-CART-01 |
