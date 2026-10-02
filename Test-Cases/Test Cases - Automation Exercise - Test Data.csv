@@ -1,0 +1,21 @@
+SECTION 1: Data set REG-VALID (valid registration data),,,
+Field,Value,,
+Title,Mrs.,,
+First name,Lara,,
+Last name,QA,,
+Address,123 Test Street,,
+Country,"[actual default, e.g., India]",,
+State,Test State,,
+City,Test City,,
+Zipcode,10110,,
+Mobile Number,0812345678,,
+Optional fields,Leave empty / unchecked,,
+,,,
+SECTION 2: Shared accounts and emails,,,
+Name,Email,Password,Purpose
+ACC-01,lara.qa.tc01@mailinator.com,Test1234,"Registered account for Login tests and TC-REG-08, 16"
+NOCREATE-01,lara.qa.nocreate01@mailinator.com,nocreate001,Signup tests that stop before Create Account. Never click Create Account with this email.
+,,,
+SECTION 3: Email naming rule for new accounts,,,
+"lara.qa.[test case ID]@mailinator.com (e.g., lara.qa.reg05a@mailinator.com)",,,
+"When re-running, add ""-2"", ""-3"" (e.g., lara.qa.reg05a-2@mailinator.com)",,,

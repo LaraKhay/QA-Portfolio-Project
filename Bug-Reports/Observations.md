@@ -32,3 +32,16 @@
 - **Related:** requirement: FR-CHK-12
 - **Reproducible:** Yes (always visible on the Payment page)
 - **Status:** Confirmed as a defect by PO (RQ-08). To be reported in Phase 7 (Bug Reporting)
+
+## OBS-05: Signup accepts passwords that break the password rules
+- **Page:** "Enter Account Information" page
+- **What I did:** Signed up twice with new emails, filled in all required fields using REG-VALID, and clicked Create Account:
+  1. Password "len05" (5 characters, too short)
+  2. Password "registertwelve" (14 characters, letters only, no number)
+- **What happened:** "Account Created!" was displayed for both passwords, and both accounts were created.
+- **What I expected:** "Password must be 8–20 characters and include at least one letter and one number." is displayed, and the account is not created.
+- **Type:** Validation
+- **Related requirements:** FR-REG-13, FR-REG-15
+- **Reproducible:** Yes (2 of 2 attempts)
+- **Status:** Defect against the password rules confirmed by PO (RQ-04). To be reported in Phase 7 (Bug Reporting).
+- **Note:** The password rules come from simulated product owner answers for this practice project.
