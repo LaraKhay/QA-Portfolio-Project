@@ -45,3 +45,14 @@
 - **Reproducible:** Yes (2 of 2 attempts)
 - **Status:** Defect against the password rules confirmed by PO (RQ-04). To be reported in Phase 7 (Bug Reporting).
 - **Note:** The password rules come from simulated product owner answers for this practice project.
+
+## OBS-06: Product details page accepts a quantity greater than 10
+- **Page:** Product details page (Men Tshirt)
+- **What I did:** Logged in with ACC-01, emptied the cart, opened the product details page for Men Tshirt, cleared the Quantity field, entered 11, and clicked Add to cart. Then clicked View Cart.
+- **What happened:** The "Added!" pop-up appeared, and the cart showed Men Tshirt with Quantity 11 and Total Rs. 4400.
+- **What I expected:** "Maximum quantity per product is 10." is displayed, and the product is not added to the cart.
+- **Type:** Validation
+- **Related requirement:** FR-CART-09
+- **Reproducible:** Yes (2 of 2 attempts)
+- **Status:** Defect against the quantity rule confirmed by PO (RQ-03). To be reported in Phase 7 (Bug Reporting).
+- **Note:** The quantity rule comes from simulated product owner answers for this practice project. A quantity of 0 was handled correctly: clicking Add to cart did nothing, and the cart stayed empty.
