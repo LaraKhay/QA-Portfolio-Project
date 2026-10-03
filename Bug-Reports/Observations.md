@@ -21,7 +21,9 @@
 - **What happened:** The invoice shows: "Hi Lara K, Your total purchase amount is 0. Thank you"
 - **What I expected:** The invoice shows the order total from the Checkout page (Rs. 500)
 - **Reproducible:** Yes, 2 of 2 times with Blue Top. An order with Madame Top For Women showed the correct amount.
-- **Status:** To be reported in Phase 7 (Bug Reporting)
+- **Update (2026-10-03):** Not reproducible. Retested with Blue Top using both ACC-01 ("Lara QA") and the original account ("Lara K"). In both cases, the invoice showed the correct total of 500 (see TC-CHK-08a). The site may have been fixed or changed, or the defect may have been intermittent.
+- **Status:** Cannot reproduce (as of 2026-10-03)
+
 
 ## OBS-04: Required fields on the Payment page are not marked with *
 - **Page:** "Payment" page

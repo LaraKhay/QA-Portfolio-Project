@@ -52,7 +52,7 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 |---|---|---|
 | OBS-01 | Signup accepts an email address without a domain extension (e.g., test@gmail) | Confirmed as a defect by PO |
 | OBS-02 | Grammar error in the duplicate email message ("already exist!") | To be reported |
-| OBS-03 | Invoice shows a total of 0 for orders containing Blue Top (reproducible, product-specific) | To be reported |
+| OBS-03 | Invoice showed a total of 0 for orders containing Blue Top (reproduced twice, isolated to one product) | Cannot reproduce as of 2026-10-03 |
 | OBS-04 | Required fields on the Payment page are not marked with * | Confirmed as a defect by PO |
 | OBS-05 | Signup accepts passwords that break the password rules | Defect against simulated requirement |
 | OBS-06 | Product details page accepts a quantity greater than 10 | Defect against simulated requirement |
