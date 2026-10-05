@@ -70,3 +70,38 @@
 - **Evidence:** TC-LOG-13_1-after-logout.png to TC-LOG-13_4-after-link-click.png
 - **Status:** To be reported in Phase 7 (Bug Reporting)
 - **Note:** The session itself had ended. After pressing Back, clicking a link (Cart) opened a page with no account logged in, and refreshing also showed the user as logged out. So the previous page is only displayed from the browser cache; the account cannot be used.
+
+## OBS-08: API returns JSON with Content-Type "text/html"
+- **Endpoint:** GET https://automationexercise.com/api/productsList
+- **Tool:** Postman
+- **What I did:** Sent a GET request to the endpoint and checked the response headers.
+- **What happened:** The response body is JSON (e.g., {"responseCode": 200, "products": [...]}), but the Content-Type header is "text/html; charset=utf-8".
+- **What I expected:** Content-Type is "application/json" for a JSON response.
+- **Type:** API
+- **Reproducible:** Yes (3 of 3 attempts)
+- **Status:** To be reported in Phase 7 (Bug Reporting)
+- **Scope:** Every endpoint tested returns Content-Type "text/html; charset=utf-8", including both successful and error responses.
+- **Note:** The API list does not mention Content-Type. Whether this is intentional is unknown; the impact is the same in either case.
+
+## OBS-09: API returns HTTP 200 OK for an unsupported method, while the body says 405
+- **Endpoint:** POST https://automationexercise.com/api/productsList
+- **Tool:** Postman
+- **What I did:** Sent a POST request to the endpoint, which only supports GET.
+- **What happened:** The HTTP status code was 200 OK, but the body was {"responseCode": 405, "message": "This request method is not supported."}.
+- **What I expected:** The HTTP status code is 405 Method Not Allowed, matching the body.
+- **Type:** API
+- **Reproducible:** Yes (2 of 2 attempts)
+- **Impact:** Programs read the Content-Type label to decide how to handle a response. Because JSON is labeled as a web page, clients may handle the data incorrectly (for example, Chrome does not recognize it as JSON).
+- **Note:** The same behavior occurs on every endpoint, and the official API list documents only the responseCode inside the body. This suggests the behavior is a deliberate design choice rather than an accident. However, it still deviates from the HTTP standard, so tools that check only the HTTP status will treat failed requests as successful.
+- **Status:** To be discussed (likely by design)
+
+## OBS-10: Brands List API returns duplicate brands
+- **Endpoint:** GET https://automationexercise.com/api/brandsList
+- **Tool:** Postman
+- **What I did:** Sent a GET request and compared the response with the Brands sidebar on the website's Products page.
+- **What happened:** The response contains 34 items but only 8 different brands. Brands are repeated; for example, "Polo" appears 6 times. The number of entries for each brand matches the number of products of that brand in the Products List API (e.g., 6 Polo products).
+- **What I expected:** Each brand is listed once, matching the 8 brands shown on the website.
+- **Type:** API / Data consistency
+- **Related test case:** TC-API-03
+- **Reproducible:** Yes (2 of 2 attempts)
+- **Status:** To be reported in Phase 7 (Bug Reporting)
