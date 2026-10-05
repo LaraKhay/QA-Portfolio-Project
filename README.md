@@ -46,22 +46,43 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 - [Test Design Techniques](Test-Cases/Test-Design-Techniques.md): equivalence partitioning and boundary value analysis for password length and quantity rules
 - [Test Cases](Test-Cases/): 103 detailed test cases across 5 modules (Login and Logout, Registration, Cart, Checkout and Payment, Non-Functional), with reusable test data sets
 
+### Test Execution (in progress)
+- Smoke test passed: entry criteria met on 2026-10-03
+- High-priority tests executed first, following a risk-based approach (Checkout and Payment, Login and Logout, Registration)
+- Every executed test records the actual result, execution date, and screenshot evidence ([Screenshots](Screenshots/))
+
+## Test Execution Progress
+
+| Module | Total | Executed | Passed | Failed | Not Run |
+|---|---|---|---|---|---|
+| Login and Logout | 14 | 6 | 5 | 1 | 8 |
+| Registration | 36 | 11 | 8 | 3 | 25 |
+| Cart | 25 | 1 | 1 | 0 | 24 |
+| Checkout and Payment | 22 | 7 | 7 | 0 | 15 |
+| Non-Functional | 6 | 0 | 0 | 0 | 6 |
+| **Total** | **103** | **25** | **21** | **4** | **78** |
+
+*Last updated: 2026-10-05*
+
 ## Key Findings So Far
 
 | ID | Finding | Status |
 |---|---|---|
-| OBS-01 | Signup accepts an email address without a domain extension (e.g., test@gmail) | Confirmed as a defect by PO |
+| OBS-01 | Signup accepts an email address without a domain extension (e.g., test@gmail) | Confirmed by PO; reproduced in TC-REG-07 |
 | OBS-02 | Grammar error in the duplicate email message ("already exist!") | To be reported |
 | OBS-03 | Invoice showed a total of 0 for orders containing Blue Top (reproduced twice, isolated to one product) | Cannot reproduce as of 2026-10-03 |
-| OBS-04 | Required fields on the Payment page are not marked with * | Confirmed as a defect by PO |
-| OBS-05 | Signup accepts passwords that break the password rules | Defect against simulated requirement |
+| OBS-04 | Required fields on the Payment page are not marked with * | Confirmed by PO |
+| OBS-05 | Signup accepts passwords that break the password rules | Defect against simulated requirement; reproduced in TC-REG-14b, 15a |
 | OBS-06 | Product details page accepts a quantity greater than 10 | Defect against simulated requirement |
+| OBS-07 | Back button after logout shows the previous logged-in page from the browser cache (the session itself has ended) | To be reported |
 
 Full details: [Observations](Bug-Reports/Observations.md)
 
 ## Tools
 
-Google Sheets, VS Code (Markdown), Git and GitHub, Postman, DB Browser for SQLite, Playwright, GitHub Actions
+**Used so far:** Google Sheets, VS Code (Markdown), Git and GitHub, Chrome (including Developer Tools), Safari
+
+**Planned:** Postman, DB Browser for SQLite, Playwright, GitHub Actions
 
 ---
 
