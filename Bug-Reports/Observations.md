@@ -58,3 +58,15 @@
 - **Reproducible:** Yes (2 of 2 attempts)
 - **Status:** Defect against the quantity rule confirmed by PO (RQ-03). To be reported in Phase 7 (Bug Reporting).
 - **Note:** The quantity rule comes from simulated product owner answers for this practice project. A quantity of 0 was handled correctly: clicking Add to cart did nothing, and the cart stayed empty.
+
+## OBS-07: Back button after logout shows the previous logged-in page
+- **Page:** Home page (after logout)
+- **What I did:** Logged in with ACC-01, clicked Logout, then pressed the browser's Back button. Then refreshed the page (Cmd + R).
+- **What happened:** After pressing Back, the Home page was displayed with "Logged in as Lara QA" in the header. After refreshing, the page showed no account logged in.
+- **What I expected:** After pressing Back, the header does not show "Logged in as Lara QA".
+- **Type:** Security
+- **Related test case:** TC-LOG-13
+- **Reproducible:** Yes (3 of 3 attempts)
+- **Evidence:** TC-LOG-13_1-after-logout.png to TC-LOG-13_4-after-link-click.png
+- **Status:** To be reported in Phase 7 (Bug Reporting)
+- **Note:** The session itself had ended. After pressing Back, clicking a link (Cart) opened a page with no account logged in, and refreshing also showed the user as logged out. So the previous page is only displayed from the browser cache; the account cannot be used.
