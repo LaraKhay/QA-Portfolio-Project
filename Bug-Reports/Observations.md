@@ -71,28 +71,47 @@
 - **Status:** To be reported in Phase 7 (Bug Reporting)
 - **Note:** The session itself had ended. After pressing Back, clicking a link (Cart) opened a page with no account logged in, and refreshing also showed the user as logged out. So the previous page is only displayed from the browser cache; the account cannot be used.
 
-## OBS-08: API returns JSON with Content-Type "text/html"
-- **Endpoint:** GET https://automationexercise.com/api/productsList
+## OBS-08: All API responses use Content-Type "text/html" instead of "application/json"
+- **Endpoints tested (all 14 documented APIs, 16 requests):**
+  - GET /api/productsList (TC-API-01)
+  - POST /api/productsList (TC-API-02)
+  - GET /api/brandsList (TC-API-03)
+  - PUT /api/brandsList (TC-API-04)
+  - POST /api/searchProduct, with and without search_product (TC-API-05, 06)
+  - POST /api/verifyLogin, valid, without email, and invalid details (TC-API-07, 08, 10)
+  - DELETE /api/verifyLogin (TC-API-09)
+  - POST /api/createAccount (TC-API-11)
+  - DELETE /api/deleteAccount (TC-API-12)
+  - PUT /api/updateAccount (TC-API-13)
+  - GET /api/getUserDetailByEmail (TC-API-14, 15, 16)
+  - POST /api/verifyLogin?email=lara.qa.tc01@mailinator.com&password=Test1234 (TC-API-17)
+  - GET /api/verifyLogin?email=lara.qa.tc01@mailinator.com&password=Test1234 (TC-API-18)
 - **Tool:** Postman
-- **What I did:** Sent a GET request to the endpoint and checked the response headers.
-- **What happened:** The response body is JSON (e.g., {"responseCode": 200, "products": [...]}), but the Content-Type header is "text/html; charset=utf-8".
-- **What I expected:** Content-Type is "application/json" for a JSON response.
+- **What I did:** Sent requests to each endpoint and checked the Content-Type response header.
+- **What happened:** Every response body is JSON, but every response has the header Content-Type: "text/html; charset=utf-8". This applies to both successful and error responses.
+- **What I expected:** Content-Type is "application/json" for JSON responses.
+- **Impact:** Programs read the Content-Type to decide how to handle a response. Because JSON is labeled as a web page, clients may handle the data incorrectly (for example, Chrome does not recognize it as JSON and shows no Pretty-print option), and browsers may treat the data as a web page, which increases the risk of cross-site scripting (XSS).
 - **Type:** API
-- **Reproducible:** Yes (3 of 3 attempts)
+- **Reproducible:** Yes (all 18 requests)
+- **Evidence:** API-01_content-type-text-html.png, API-01b_github-json-pretty-print.png, API-01c_productslist-no-pretty-print.png
+- **Note:** The API list does not mention Content-Type. Because the same label appears on every endpoint, the cause is probably one shared setting or framework default, so a single fix would likely correct all endpoints.
 - **Status:** To be reported in Phase 7 (Bug Reporting)
-- **Scope:** Every endpoint tested returns Content-Type "text/html; charset=utf-8", including both successful and error responses.
-- **Note:** The API list does not mention Content-Type. Whether this is intentional is unknown; the impact is the same in either case.
 
-## OBS-09: API returns HTTP 200 OK for an unsupported method, while the body says 405
-- **Endpoint:** POST https://automationexercise.com/api/productsList
+## OBS-09: All API responses return HTTP 200 OK, including errors and account creation
+- **Endpoints tested (all 14 documented APIs, 18 requests):** same as OBS-08
 - **Tool:** Postman
-- **What I did:** Sent a POST request to the endpoint, which only supports GET.
-- **What happened:** The HTTP status code was 200 OK, but the body was {"responseCode": 405, "message": "This request method is not supported."}.
-- **What I expected:** The HTTP status code is 405 Method Not Allowed, matching the body.
+- **What I did:** Sent successful and invalid requests, and compared the HTTP status code with the responseCode in the body.
+- **What happened:** Every response returned HTTP 200 OK. When the body reported a different result, the HTTP status still said 200 OK:
+  - Unsupported method: HTTP 200, body 405, "This request method is not supported." (TC-API-02, 04, 09, 18)
+  - Missing parameter: HTTP 200, body 400, "Bad request, ... parameter is missing in POST request." (TC-API-06, 08, 17)
+  - User or account not found: HTTP 200, body 404, "User not found!" / "Account not found with this email, try another email!" (TC-API-10, 16)
+  - Account created: HTTP 200, body 201, "User created!" (TC-API-11)
+- **What I expected:** The HTTP status code matches the result: 405 Method Not Allowed, 400 Bad Request, 404 Not Found, and 201 Created.
+- **Impact:** Tools and programs that check only the HTTP status code will treat failed requests as successful, and cannot tell a newly created account apart from other successful requests.
 - **Type:** API
-- **Reproducible:** Yes (2 of 2 attempts)
-- **Impact:** Programs read the Content-Type label to decide how to handle a response. Because JSON is labeled as a web page, clients may handle the data incorrectly (for example, Chrome does not recognize it as JSON).
-- **Note:** The same behavior occurs on every endpoint, and the official API list documents only the responseCode inside the body. This suggests the behavior is a deliberate design choice rather than an accident. However, it still deviates from the HTTP standard, so tools that check only the HTTP status will treat failed requests as successful.
+- **Reproducible:** Yes (all 11 requests where the body code is not 200)
+- **Evidence:** API-02_post-productLists-rejected.png, API-04_put-brandLists-rejected.png, API-06_search-product-no-parameter.png, API-08_login-no-email.png, API-09_delete-login-rejected.png, API-10_login-invalid-pw-rejected.png, API-11_create_new_userAccount.png, API-16_get-user-detail-after-delete.png,API-17_post-login-credentials-in-url.png, API-18_get-login-credentials-in-url.png
+- **Note:** The official API list documents only the responseCode inside the body, and the behavior is consistent on every endpoint. This suggests a deliberate design choice, but it still deviates from the HTTP standard.
 - **Status:** To be discussed (likely by design)
 
 ## OBS-10: Brands List API returns duplicate brands
@@ -105,3 +124,16 @@
 - **Related test case:** TC-API-03
 - **Reproducible:** Yes (2 of 2 attempts)
 - **Status:** To be reported in Phase 7 (Bug Reporting)
+
+## OBS-11: User details API returns personal information without authentication
+- **Endpoint:** GET https://automationexercise.com/api/getUserDetailByEmail
+- **Tool:** Postman
+- **What I did:** Sent a GET request with only the email parameter of my own test account (no password, not logged in).
+- **What happened:** The response returned the account's personal details: name, email, title, birth_day, birth_month, birth_year, first_name, last_name, company, address1, address2, country, state, city, zipcode. The password was not returned.
+- **What I expected:** The API requires authentication (the user's password or a login session) before returning personal details, or returns only the details of the logged-in user.
+- **Impact:** Anyone who knows a customer's email address can retrieve their personal information, including their home address and date of birth.
+- **Type:** Security / Privacy
+- **Related test case:** TC-API-14
+- **Reproducible:** Yes (3 of 3 attempts)
+- **Status:** To be reported in Phase 7 (Bug Reporting)
+- **Note:** Tested only with my own test account.
