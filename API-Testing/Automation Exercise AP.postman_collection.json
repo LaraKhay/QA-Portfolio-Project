@@ -9,6 +9,17 @@
   "item": [
     {
       "name": "TC-API-01 Get all products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check HTTP status code\npm.test(\"Status code is 200\", function(){\n    pm.response.to.have.status(200);\n});\n\n// 2. Read the JSON body once, so we can check it\nconst body = pm.response.json();\n\n// 3. Check response code inside the body\npm.test(\"response code is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\n// 4. Check that every product has required fields\npm.test(\"Every product has id, name, price, brand and category.\",function(){\n   body.products.forEach(function(product){\n        pm.expect(product).to.include.all.keys(\"id\",\"name\",\"price\",\"brand\",\"category\");\n   });\n});\n"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -29,6 +40,17 @@
     },
     {
       "name": "TC-API-02 POST to productsList (not supported)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 405\", function(){\n    pm.response.to.have.status(405);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 405\", function(){\n    pm.expect(body.responseCode).to.equal(405);\n});\n\npm.test(\"Response body message is correct.'\", function () {\n    pm.expect(body.message).to.equal(\"This request method is not supported.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -49,6 +71,17 @@
     },
     {
       "name": "TC-API-03 Get all brands",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP status code is 200\", function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response code is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\npm.test(\"Every brand has id and brand\",function(){\n    body.brands.forEach(function(item){\n        pm.expect(item).to.include.all.keys(\"id\",\"brand\");\n    });\n});\n\npm.test(\"Every brand is listed only once\", function(){\n    const names = body.brands.map(function(item){\n        return item.brand;\n    });\n    const uniqueNames = new Set(names);\n    pm.expect(uniqueNames.size).to.equal(names.length);\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -69,6 +102,17 @@
     },
     {
       "name": "TC-API-04 PUT to brandsList(not supported)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 405\", function(){\n    pm.response.to.have.status(405);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 405\", function(){\n    pm.expect(body.responseCode).to.equal(405);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"This request method is not supported.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "PUT",
         "header": [],
@@ -98,6 +142,17 @@
     },
     {
       "name": "TC-API-05 POST to search product",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP status code is 200\", function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response code is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\npm.test(\"Every product matches the search term 'top'\", function(){\n    body.products.forEach(function(product){\n        const name = product.name.toLowerCase();\n        const category = product.category.category.toLowerCase();\n        pm.expect(name.includes(\"top\") || category.includes(\"top\"), \"Product does not match 'top': \"+ product.name).to.be.true;\n    });\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -128,18 +183,20 @@
     },
     {
       "name": "TC-API-06 POST to search product with no parameter",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 400\", function(){\n    pm.response.to.have.status(400);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 400\", function(){\n    pm.expect(body.responseCode).to.equal(400);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"Bad request, search_product parameter is missing in POST request.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
         "url": {
           "raw": "https://automationexercise.com/api/searchProduct",
           "protocol": "https",
@@ -157,6 +214,17 @@
     },
     {
       "name": "TC-API-07 POST To Verify Login with valid details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP status code is 200\", function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response code is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\npm.test(\"Response message is correct\",function(){\n    pm.expect(body.message).to.equal(\"User exists!\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -192,6 +260,17 @@
     },
     {
       "name": "TC-API-18 GET verifyLogin with credentials in URL",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 405\", function(){\n    pm.response.to.have.status(405);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 405\", function(){\n    pm.expect(body.responseCode).to.equal(405);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"This request method is not supported.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -222,6 +301,17 @@
     },
     {
       "name": "TC-API-17 POST verifyLogin with credentials in URL",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 400\", function(){\n    pm.response.to.have.status(400);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 400\", function(){\n    pm.expect(body.responseCode).to.equal(400);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"Bad request, email or password parameter is missing in POST request.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -252,6 +342,17 @@
     },
     {
       "name": "TC-API-08 POST To Verify Login without email parameter",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 400\", function(){\n    pm.response.to.have.status(400);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 400\", function(){\n    pm.expect(body.responseCode).to.equal(400);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"Bad request, email or password parameter is missing in POST request.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -282,6 +383,17 @@
     },
     {
       "name": "TC-API-09 DELETE to verify login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 405\", function(){\n    pm.response.to.have.status(405);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 405\", function(){\n    pm.expect(body.responseCode).to.equal(405);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"This request method is not supported.\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "DELETE",
         "header": [],
@@ -317,6 +429,17 @@
     },
     {
       "name": "TC-API-10 POST To verify login with invalid details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP status code is 404\", function(){\n    pm.response.to.have.status(404);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response code is 404\",function(){\n    pm.expect(body.responseCode).to.equal(404);\n});\n\npm.test(\"Response message is correct\",function(){\n    pm.expect(body.message).to.equal(\"User not found!\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -703,6 +826,28 @@
         }
       },
       "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          "// Shared checks: run after every request in this collection",
+          "pm.test(\"Response time is under 3 seconds\", function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+          "});",
+          "",
+          "pm.test(\"Content-Type is application/json\", function () {",
+          "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+          "});",
+          "",
+          "pm.test(\"Body contains a responseCode\", function () {",
+          "    pm.expect(pm.response.json()).to.have.property(\"responseCode\");",
+          "});"
+        ],
+        "type": "text/javascript"
+      }
     }
   ]
 }
