@@ -57,7 +57,7 @@
 - **Related requirement:** FR-CART-09
 - **Reproducible:** Yes (2 of 2 attempts)
 - **Status:** Defect against the quantity rule confirmed by PO (RQ-03). To be reported in Phase 7 (Bug Reporting).
-- **Note:** The quantity rule comes from simulated product owner answers for this practice project. A quantity of 0 was handled correctly: clicking Add to cart did nothing, and the cart stayed empty.
+- **Note:** The quantity rule comes from simulated product owner answers for this practice project. Quantity 0 is covered separately in OBS-12.
 
 ## OBS-07: Back button after logout shows the previous logged-in page
 - **Page:** Home page (after logout)
@@ -137,3 +137,41 @@
 - **Reproducible:** Yes (3 of 3 attempts)
 - **Status:** To be reported in Phase 7 (Bug Reporting)
 - **Note:** Tested only with my own test account.
+
+## OBS-12: Product details page accepts a quantity of 0 or less
+- **Page:** Product details page (Men Tshirt), Shopping Cart, Checkout, and Payment
+- **What I did:**
+  1. Logged in with ACC-01 and emptied the cart.
+  2. Opened the product details page for Men Tshirt, cleared the Quantity field, entered 0, and clicked Add to cart. Then clicked View Cart.
+  3. Clicked Proceed To Checkout, then Place Order, paid with fake card details (PAY-VALID), and downloaded the invoice.
+  4. Emptied the cart and repeated steps 2–3 with quantity -3.
+- **What happened:**
+  - **Quantity 0:** The "Added!" pop-up appeared, and the cart showed Men Tshirt with Quantity 0 and Total Rs. 0. At checkout, the Total Amount was Rs. 0. After paying, the "Order Placed!" page appeared, and the downloaded invoice showed "Hi Lara QA, Your total purchase amount is 0. Thank you".
+  - **Quantity -3:** The "Added!" pop-up appeared, and the cart showed Men Tshirt with Quantity -3 and Total Rs. -1200. At checkout, the Total Amount was Rs. -1200. After clicking Pay and Confirm Order, the browser opened https://automationexercise.com/payment_done/-1200 and showed a "Page not found (404)" error page (see OBS-13). The "Order Placed!" page did not appear.
+- **What I expected:** A quantity of 0 or less is not accepted, and the product is not added to the cart.
+- **Impact:** Customers (or automated scripts) can place orders with no products and a total of Rs. 0. These empty orders enter the shop's order system, where they may be processed for delivery and distort sales and order reports. Negative quantities produce negative totals (e.g., Rs. -1200); if a negative amount were ever accepted at payment, the shop could effectively owe money to the customer. The negative order failed only because of an unrelated error page, not because of proper validation. Because zero and negative quantities are invalid on any shop, this is a defect regardless of the simulated quantity rule.
+- **Type:** Validation / Business logic
+- **Related test cases:** TC-CART-13a, TC-CART-13b
+- **Related requirement:** FR-CART-10
+- **Reproducible:** Yes (quantity 0: 2 of 2 attempts; quantity -3: 3 of 3 attempts)
+- **Evidence:** TC-CART-13a_quantity-0-added.png, TC-CART-13a_quantity-0-checkout.png, TC-CART-13a_quantity-0-invoice.png, TC-CART-13b_quantity-negative-total.png, OBS-13_django-debug-404-page.png
+- **Status:** Defect against the quantity rule confirmed by PO (RQ-03). To be reported in Phase 7 (Bug Reporting).
+- **Note:** An earlier attempt on 2026-09-24 with quantity 0 did not add the product. The cause of the different result is unknown (possibly a failed request due to a slow connection, or a site change). Reproduced on 2026-10-10.
+
+## OBS-13: Live site shows a Django debug error page that reveals internal information
+- **Page:** https://automationexercise.com/payment_done/-1200 (reached after paying for an order with a negative total)
+- **What I did:** Followed the quantity -3 steps from OBS-12: added Men Tshirt with quantity -3, proceeded to checkout (Total Amount Rs. -1200), entered fake card details (PAY-VALID), and clicked Pay and Confirm Order.
+- **What happened:** The browser opened https://automationexercise.com/payment_done/-1200 and displayed a "Page not found (404)" developer debug page. The page revealed:
+  - The web framework used: Django
+  - That debug mode is enabled: "You're seeing this error because you have DEBUG = True in your Django settings file."
+  - The full list of 33 internal URL patterns, including "admin/", "payment_done/<int:overall_amount>", "download_invoice/<int:overall_amount>", and all API endpoints
+- **What I expected:** A simple, user-friendly error page that does not reveal any internal information. Debug mode is turned off on the live site.
+- **Impact:** The page gives anyone a map of the system: the framework, the location of the admin area, and all internal addresses. Attackers can use this information to plan attacks. Debug mode can also show even more detailed information (such as code and settings) when other kinds of errors occur.
+- **Type:** Security (information disclosure caused by a security misconfiguration)
+- **Related test case:** TC-CART-13b
+- **Related observation:** OBS-12
+- **Reproducible:** Yes (3 of 3 attempts)
+- **Evidence:** OBS-13_django-debug-404-page.png
+- **Suggested fix:** Turn off debug mode on the live site (DEBUG = False) and show a standard error page instead.
+- **Note (hypothesis, not tested):** The URL patterns show that the order amount is passed in the web address (payment_done/<int:overall_amount> and download_invoice/<int:overall_amount>). If the invoice amount is taken from the URL, someone could change the number in the address to produce an invoice for a different amount. This may also relate to OBS-03 (invoice showing 0). This was deliberately not tested, to avoid tampering with the site.
+- **Status:** To be reported in Phase 7 (Bug Reporting)
