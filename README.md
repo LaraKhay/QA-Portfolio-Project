@@ -4,7 +4,7 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 
 **Application under test:** [Automation Exercise](https://automationexercise.com), a public demo online clothing store built for testing practice.
 
-**Status:** 🚧 In progress. Currently in Phase 6 (Test Execution) and Phase 9 (API Testing).
+**Status:** 🚧 In progress. Currently in Phase 6: Test Execution.
 
 **Author:** Nang Yu Yu Khay (Lara)
 
@@ -22,7 +22,7 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 | 6. Test Execution | 🚧 In progress |
 | 7. Bug Reporting | ⏳ Planned |
 | 8. Bug Lifecycle | ⏳ Planned |
-| 9. API Testing | 🚧 In progress |
+| 9. API Testing | ✅ Completed |
 | 10. Database Testing | ⏳ Planned |
 | 11. Automation Testing | ⏳ Planned |
 | 12. Regression Testing | ⏳ Planned |
@@ -51,10 +51,12 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 - High-priority tests executed first, following a risk-based approach (Checkout and Payment, Login and Logout, Registration, Cart)
 - Every executed test records the actual result, execution date, and screenshot evidence ([Screenshots](Screenshots/))
 
-### API Testing (in progress)
+### API Testing
 - [API Test Cases](API-Testing/API-Testing.csv): 18 test cases covering all 14 documented APIs, plus chained account tests (create, read, update, delete) and security checks for credentials in the URL
-- [Postman Collection](API-Testing/Automation-Exercise-API.postman_collection.json): all requests, ready to import and rerun
-- Automated checks with Postman test scripts: shared collection-level checks (response time, Content-Type, responseCode) and request-specific checks for status codes, messages, and data, run with the Collection Runner
+- [Postman Collection](API-Testing/Automation-Exercise-API.postman_collection.json): all requests with test scripts, ready to import and rerun
+- Full collection automated: 18 requests with Postman test scripts, including shared collection-level checks (response time, Content-Type, responseCode) and request-specific checks for status codes, messages, and data
+- Account tests are rerunnable: a unique test email is generated for each run using collection variables
+- Every automated failure is traced to a known observation (failures predicted before each run matched the actual results)
 
 ## Test Execution Progress
 
@@ -77,7 +79,9 @@ A hands-on software testing project where I test a B2C e-commerce web applicatio
 
 *Most API failures share one cause: error responses return HTTP 200 OK (OBS-09).*
 
-*Last updated: 2026-10-10*
+*Automated run: 108 checks, 79 passed, 29 failed (all traced to known observations).*
+
+*Last updated: 2026-10-11*
 
 ## Key Findings So Far
 
@@ -101,7 +105,7 @@ Full details: [Observations](Bug-Reports/Observations.md)
 
 ## Tools
 
-**Used so far:** Postman, Google Sheets, VS Code (Markdown), Git and GitHub, Chrome (including Developer Tools), Safari
+**Used so far:** Postman (including test scripts and variables), Google Sheets, VS Code (Markdown), Git and GitHub, Chrome (including Developer Tools), Safari
 
 **Planned:** DB Browser for SQLite, Playwright, GitHub Actions
 

@@ -259,88 +259,6 @@
       "response": []
     },
     {
-      "name": "TC-API-18 GET verifyLogin with credentials in URL",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 405\", function(){\n    pm.response.to.have.status(405);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 405\", function(){\n    pm.expect(body.responseCode).to.equal(405);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"This request method is not supported.\");\n});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "https://automationexercise.com/api/verifyLogin?email=lara.qa.tc01@mailinator.com&password=Test1234",
-          "protocol": "https",
-          "host": [
-            "automationexercise",
-            "com"
-          ],
-          "path": [
-            "api",
-            "verifyLogin"
-          ],
-          "query": [
-            {
-              "key": "email",
-              "value": "lara.qa.tc01@mailinator.com"
-            },
-            {
-              "key": "password",
-              "value": "Test1234"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "TC-API-17 POST verifyLogin with credentials in URL",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 400\", function(){\n    pm.response.to.have.status(400);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 400\", function(){\n    pm.expect(body.responseCode).to.equal(400);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"Bad request, email or password parameter is missing in POST request.\");\n});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "url": {
-          "raw": "https://automationexercise.com/api/verifyLogin?email=lara.qa.tc01@mailinator.com&password=Test1234",
-          "protocol": "https",
-          "host": [
-            "automationexercise",
-            "com"
-          ],
-          "path": [
-            "api",
-            "verifyLogin"
-          ],
-          "query": [
-            {
-              "key": "email",
-              "value": "lara.qa.tc01@mailinator.com"
-            },
-            {
-              "key": "password",
-              "value": "Test1234"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "TC-API-08 POST To Verify Login without email parameter",
       "event": [
         {
@@ -475,6 +393,26 @@
     },
     {
       "name": "TC-API-11 POST To Create/Register User Account",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const email = \"lara.qa.api\" + Date.now() + \"@mailinator.com\";\npm.collectionVariables.set(\"testEmail\", email);\nconsole.log(\"Email for this run: \"+ email);\n"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201\",function(){\n    pm.response.to.have.status(201);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response codes is 201\",function(){\n    pm.expect(body.responseCode).to.equal(201);\n});\n\npm.test(\"Response message is correct\",function(){\n    pm.expect(body.message).to.equal(\"User created!\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -488,7 +426,7 @@
             },
             {
               "key": "email",
-              "value": "laraQA@gmail.com",
+              "value": "{{testEmail}}",
               "type": "text"
             },
             {
@@ -584,27 +522,23 @@
       "response": []
     },
     {
-      "name": "TC-API-12 DELETE user account",
+      "name": "TC-API-14 GET user account detail",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\",function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response codes is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\npm.test(\"Response email is correct\",function(){\n    pm.expect(body.user.email).to.equal(pm.collectionVariables.get(\"testEmail\"));\n});\n\n"
+            ]
+          }
+        }
+      ],
       "request": {
-        "method": "DELETE",
+        "method": "GET",
         "header": [],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "email",
-              "value": "laraQA@gmail.com",
-              "type": "text"
-            },
-            {
-              "key": "password",
-              "value": "Test1234",
-              "type": "text"
-            }
-          ]
-        },
         "url": {
-          "raw": "https://automationexercise.com/api/deleteAccount",
+          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email={{testEmail}}",
           "protocol": "https",
           "host": [
             "automationexercise",
@@ -612,7 +546,13 @@
           ],
           "path": [
             "api",
-            "deleteAccount"
+            "getUserDetailByEmail"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{testEmail}}"
+            }
           ]
         }
       },
@@ -620,6 +560,17 @@
     },
     {
       "name": "TC-API-13 PUT to update user account",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\",function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response codes is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\npm.test(\"Response message is correct\",function(){\n    pm.expect(body.message).to.equal(\"User updated!\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "PUT",
         "header": [],
@@ -633,7 +584,7 @@
             },
             {
               "key": "email",
-              "value": "laraQA@gmail.com",
+              "value": "{{testEmail}}",
               "type": "text"
             },
             {
@@ -729,7 +680,18 @@
       "response": []
     },
     {
-      "name": "TC-API-14 GET user account detail",
+      "name": "TC-API-15 Get user detail after update",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Updated fields have new values\", function(){\n    pm.expect(body.user.address1).to.equal(\"123 Update Street\");\n    pm.expect(body.user.address2).to.equal(\"224 Update Street\");\n    pm.expect(body.user.state).to.equal(\"Update State\");\n    pm.expect(body.user.city).to.equal(\"Update City\");\n});\n\npm.test(\"Unchanged fields keep their original values\", function(){\n    pm.expect(body.user.first_name).to.equal(\"Lara\");\n    pm.expect(body.user.last_name).to.equal(\"QA\");\n    pm.expect(body.user.company).to.equal(\"Tasla\");\n    pm.expect(body.user.country).to.equal(\"India\");\n    pm.expect(body.user.zipcode).to.equal(\"57100\");\n});"
+            ]
+          }
+        }
+      ],
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -741,7 +703,7 @@
           "formdata": []
         },
         "url": {
-          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email=laraQA@gmail.com",
+          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email={{testEmail}}",
           "protocol": "https",
           "host": [
             "automationexercise",
@@ -754,7 +716,7 @@
           "query": [
             {
               "key": "email",
-              "value": "laraQA@gmail.com"
+              "value": "{{testEmail}}"
             }
           ]
         }
@@ -762,19 +724,38 @@
       "response": []
     },
     {
-      "name": "TC-API-15 Get user detail after update",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
+      "name": "TC-API-12 DELETE user account",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\",function(){\n    pm.response.to.have.status(200);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response codes is 200\",function(){\n    pm.expect(body.responseCode).to.equal(200);\n});\n\npm.test(\"Response message is correct\",function(){\n    pm.expect(body.message).to.equal(\"Account deleted!\");\n});"
+            ]
+          }
+        }
+      ],
       "request": {
-        "method": "GET",
+        "method": "DELETE",
         "header": [],
         "body": {
           "mode": "formdata",
-          "formdata": []
+          "formdata": [
+            {
+              "key": "email",
+              "value": "{{testEmail}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "Test1234",
+              "type": "text"
+            }
+          ]
         },
         "url": {
-          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email=laraQA@gmail.com",
+          "raw": "https://automationexercise.com/api/deleteAccount",
           "protocol": "https",
           "host": [
             "automationexercise",
@@ -782,13 +763,7 @@
           ],
           "path": [
             "api",
-            "getUserDetailByEmail"
-          ],
-          "query": [
-            {
-              "key": "email",
-              "value": "laraQA@gmail.com"
-            }
+            "deleteAccount"
           ]
         }
       },
@@ -796,6 +771,17 @@
     },
     {
       "name": "TC-API-16 Get user detail after delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\",function(){\n    pm.response.to.have.status(404);\n});\n\nconst body = pm.response.json();\n\npm.test(\"Response codes is 404\",function(){\n    pm.expect(body.responseCode).to.equal(404);\n});\n"
+            ]
+          }
+        }
+      ],
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -807,7 +793,7 @@
           "formdata": []
         },
         "url": {
-          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email=laraQA@gmail.com",
+          "raw": "https://automationexercise.com/api/getUserDetailByEmail?email={{testEmail}}",
           "protocol": "https",
           "host": [
             "automationexercise",
@@ -820,7 +806,89 @@
           "query": [
             {
               "key": "email",
-              "value": "laraQA@gmail.com"
+              "value": "{{testEmail}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-API-17 POST verifyLogin with credentials in URL",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 400\", function(){\n    pm.response.to.have.status(400);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 400\", function(){\n    pm.expect(body.responseCode).to.equal(400);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"Bad request, email or password parameter is missing in POST request.\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://automationexercise.com/api/verifyLogin?email=lara.qa.tc01@mailinator.com&password=Test1234",
+          "protocol": "https",
+          "host": [
+            "automationexercise",
+            "com"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "lara.qa.tc01@mailinator.com"
+            },
+            {
+              "key": "password",
+              "value": "Test1234"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-API-18 GET verifyLogin with credentials in URL",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Check the HTTP response code\npm.test(\"HTTP status is 405\", function(){\n    pm.response.to.have.status(405);\n});\n\nconst body = pm.response.json();\n\n// 2. check the response body code\npm.test(\"Response body code is 405\", function(){\n    pm.expect(body.responseCode).to.equal(405);\n});\n\npm.test(\"Response body message is correct.\", function () {\n    pm.expect(body.message).to.equal(\"This request method is not supported.\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://automationexercise.com/api/verifyLogin?email=lara.qa.tc01@mailinator.com&password=Test1234",
+          "protocol": "https",
+          "host": [
+            "automationexercise",
+            "com"
+          ],
+          "path": [
+            "api",
+            "verifyLogin"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "lara.qa.tc01@mailinator.com"
+            },
+            {
+              "key": "password",
+              "value": "Test1234"
             }
           ]
         }
@@ -848,6 +916,12 @@
         ],
         "type": "text/javascript"
       }
+    }
+  ],
+  "variable": [
+    {
+      "key": "testEmail",
+      "value": ""
     }
   ]
 }
