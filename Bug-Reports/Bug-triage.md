@@ -15,6 +15,6 @@ Decision on which observations are reported as bugs.
 | OBS-09 | All API responses return HTTP 200 OK, including errors and account creation | Discuss | Likely by design (the API list documents only the body code); raise with the team as a discussion point. | N/A |
 | OBS-10 | Brands List API returns duplicate brands | Report | API returns 34 entries for 8 brands, inconsistent with the website; apps using the API would show duplicate brands. |  |
 | OBS-11 | User details API returns personal information without authentication | Report | Anyone who knows a customer’s email address can get their personal information, including name, address, and date of birth, without logging in. |  |
-| OBS-12 | Product details page accepts a quantity of 0 or less | Report | Orders can be placed for Rs. 0, and negative quantities produce negative totals; invalid on any shop and affects checkout and money. |  |
-| OBS-13 | Live site shows a Django debug error page that reveals internal information | Report | The live site reveals the framework, debug mode, and internal URLs (including admin/), helping attackers plan attacks. |  |
+| OBS-12 | Product details page accepts a quantity of 0 or less | Report | Orders can be placed for Rs. 0, and negative quantities produce negative totals; invalid on any shop and affects checkout and money. | BUG-001 |
+| OBS-13 | Live site shows a Django debug error page that reveals internal information | Report | The live site reveals the framework, debug mode, and internal URLs (including admin/), helping attackers plan attacks. | BUG-002 |
 
