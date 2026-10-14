@@ -175,3 +175,23 @@
 - **Suggested fix:** Turn off debug mode on the live site (DEBUG = False) and show a standard error page instead.
 - **Note (hypothesis, not tested):** The URL patterns show that the order amount is passed in the web address (payment_done/<int:overall_amount> and download_invoice/<int:overall_amount>). If the invoice amount is taken from the URL, someone could change the number in the address to produce an invoice for a different amount. This may also relate to OBS-03 (invoice showing 0). This was deliberately not tested, to avoid tampering with the site.
 - **Status:** To be reported in Phase 7 (Bug Reporting)
+
+## OBS-14: Login rejects a registered email when it contains any capital letters
+- **Page:** Signup / Login
+- **What I did:**
+  Tried to login with three variations of email format.
+  1. LARA.QA.TC01@MAILINATOR.COM (all capitals)
+  2. Lara.qa.tc01@mailinator.com (only the first letter capital)
+  3. lara.qa.tc01@MAILINATOR.COM (only the domain in capitals)
+- **What happened:**
+ For all three variations of email format, the site displayed "Your email or password is incorrect!" and the user was not logged in.
+- **What I expected:** The email is accepted regardless of capitalization, and the user is logged in.
+- **Impact:** Users whose phone keyboard automatically capitalizes the first letter cannot log in until they notice and correct it. Because the error message says “email or password is incorrect,” users may wrongly assume their password is wrong and give up or try to reset it. Email domains are not case-sensitive by internet standards, so this affects real users regardless of the simulated rule.
+- **Hypothesis**: the site compares the entered email with the stored email exactly, character by character, so any difference in capitalization causes a mismatch.
+- **Type:** Validation 
+- **Related test cases:** TC-LOG-09, TC-LOG-10
+- **Related requirement:** FR-LOG-12, FR-LOG-13
+- **Reproducible:** Yes (3 of 3 variations failed)
+- **Evidence:** TC-LOG-09_all-capitalization.png, TC-LOG-09_first-letter-capitalization.png, TC-LOG-09_email-domain-capitalization.png
+- **Status:** Defect against the email rule confirmed by PO (RQ-10). To be reported in Phase 7 (Bug Reporting).
+- **Note:** The rule comes from simulated PO answers (RQ-10).
