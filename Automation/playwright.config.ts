@@ -1,5 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Note: automationexercise.com is a public practice site that sometimes becomes slow
+// or returns server errors (Cloudflare 520) after several requests. Tests use
+// workers: 1, one retry, ad blocking, and waitUntil: 'domcontentloaded' to reduce
+// these environment-related failures. Remaining failures should be checked in the
+// trace before being treated as bugs.
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -13,20 +18,24 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  // The public test site is slow because of ads, so allow more time per test
+  timeout: 60_000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  // retries: process.env.CI ? 2 : 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  // workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: 'https://automationexercise.com',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
